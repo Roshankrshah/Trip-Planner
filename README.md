@@ -71,62 +71,113 @@ area it contains address, name, type etc.
 ![image](https://user-images.githubusercontent.com/91787844/236267157-e4b1bbec-57da-4fbc-972b-0aea86af134c.png)
 
 Find Candidate Key
+
 •	Attribute not present any sides: None
+
 •	Attribute present Only on left side: name, Dep_time, fare, status, seats, hours.
+
 •	Attribute present Only on right side: id, classId, source, destination, date.
+
 •	Attribute present both sides: None
+
 CK- (id, classId, source, destination, date)+ = R
+
 Now decomposed the table into four table for BCNF normalization.
 
+
 ### Train
+
 In this table there is one functional dependency 
+
 {train_id --> train_name} and the normal form is BCNF.
 
+
 •	TrainDepartureTime
+
   •	FDs: {train_id, source} ---> departure_time 
+  
   •	Normal Form: BCNF 
+  
   •	Foreign Key:
+  
     o	train_id from table Train as train_id
+    
     o	city_name from table City as source
+    
 •	TrainReservation
+
   •	FDs:
+  
     o	{train_id, ClassId, source, destination, Date} ---> fare 
+    
     o	{train_id, ClassId, source, destination, Date} ---> train_status 
+    
     o	{train_id, ClassId, source, destination, Date} ---> no_of_seats 
+    
   •	Normal Form: BCNF
+  
   •	Foreign Key:
+  
     o	{train_id, source} from table TrainDepartureTime as {train_id, source}
+    
     o	city_name from table City as destination 
     
 •	TrainJourneyHours
+
   •	FDs:
+  
     o	{train_id, source, destination} ---> journey_hours 
+    
   •	Normal Form: BCNF
+  
   •	Foreign Key:
+  
     o	{train_id, source} from table TrainDepartureTime as {train_id, source}
+    
     o	city_name from table City as destination
+    
 
 ###	CAB
 •	CabType
-•	Normal Form: BCNF
+
+ •	Normal Form: BCNF
+ 
 •	CabService
-•	FDs:
-o	cab_service_id ---> provider_name
-o	cab_service_id ---> contact_no
-o	cab_service_id ---> rating
-•	Normal Form: BCNF
+
+  •	FDs:
+  
+    o	cab_service_id ---> provider_name
+    
+    o	cab_service_id ---> contact_no
+    
+    o	cab_service_id ---> rating
+    
+  •	Normal Form: BCNF
+  
 •	CabServiceInACity
-•	Normal Form: BCNF
-•	Foreign Key:
-o	cab_service_id from table CabService as cab_service_id
-o	city_name from table City as city_name 
+
+  •	Normal Form: BCNF
+  
+  •	Foreign Key:
+  
+    o	cab_service_id from table CabService as cab_service_id
+    
+    o	city_name from table City as city_name 
+    
 •	Cabs
-•	FDs:
-o	{cab_service_id, city_name, cab_type} ---> cost_per_day
-o	{cab_service_id, city_name, cab_type} ---> total_available_cabs
+  
+ •	FDs: 
+ 
+    o	{cab_service_id, city_name, cab_type} ---> cost_per_day
+    
+    o	{cab_service_id, city_name, cab_type} ---> total_available_cabs
+    
 •	Normal Form: BCNF
+
 •	Foreign Key:
-o	{cab_service_id, city_name} from table CabServiceInACity as {cab_service_id, city_name}
-o	cab_type from table CabType as cab_type 
+
+    o	{cab_service_id, city_name} from table CabServiceInACity as {cab_service_id, city_name}
+    
+    o	cab_type from table CabType as cab_type 
 
     
