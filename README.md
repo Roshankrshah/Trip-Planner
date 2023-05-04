@@ -293,42 +293,42 @@ In this table there is one functional dependency
 
  •	FDs:
  
-   o	{hotel_name, locality_id} ---> rating
+     o	{hotel_name, locality_id} ---> rating
    
-   o	{hotel_name, locality_id} ---> street_address
+     o	{hotel_name, locality_id} ---> street_address
    
-   o	{hotel_name, locality_id} ---> is_room_service
+     o	{hotel_name, locality_id} ---> is_room_service
    
-   o	{hotel_name, locality_id} ---> contact_no
+     o	{hotel_name, locality_id} ---> contact_no
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	locality_id from table Locality as locality_id 
+     o	locality_id from table Locality as locality_id 
    
 
 #### HotelReservation
 
  •	FDs:
  
-   o	{hotel_name, locality_id, date_of_availability, RoomType} ---> total_available_rooms
+     o	{hotel_name, locality_id, date_of_availability, RoomType} ---> total_available_rooms
    
-   o	{hotel_name, locality_id, date_of_availability, RoomType} ---> cost
+     o	{hotel_name, locality_id, date_of_availability, RoomType} ---> cost
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	{hotel_name, locality_id} from table Hotels as {hotel_name, locality_id}
+     o	{hotel_name, locality_id} from table Hotels as {hotel_name, locality_id}
    
-   o	room_type from table TypeOfRoom as room_type  
+     o	room_type from table TypeOfRoom as room_type  
    
 #### TypeOfRoom
 
  •	FDs:
  
-   o	room_type ---> max_accomodation
+     o	room_type ---> max_accomodation
    
  •	Normal Form: BCNF
  
@@ -337,19 +337,19 @@ In this table there is one functional dependency
 
  •	FDs:
  
-   o	{restaurant_name, locality_id} ---> restaurant_type
+     o	{restaurant_name, locality_id} ---> restaurant_type
    
-   o	{restaurant_name, locality_id} ---> rating
+     o	{restaurant_name, locality_id} ---> rating
    
-   o	{restaurant_name, locality_id} ---> street_address
+     o	{restaurant_name, locality_id} ---> street_address
    
-   o	{restaurant_name, locality_id} ---> AvgRate/Person  
+     o	{restaurant_name, locality_id} ---> AvgRate/Person  
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	locality_id from table Locality as locality_id
+     o	locality_id from table Locality as locality_id
    
 
 # QUERIES:
@@ -412,6 +412,7 @@ OUTPUT
  
 
 MySQL Command 
+ 
  ![image](https://user-images.githubusercontent.com/91787844/236276713-ff3af607-d54f-40dc-ac0f-bacf40c8419e.png)
  
  OUTPUT
@@ -437,6 +438,7 @@ MySQL Command
  ![image](https://user-images.githubusercontent.com/91787844/236277045-4f037805-a7e7-4da6-ab7e-73cb06ba87a0.png)
  
  OUTPUT
+ 
  ![image](https://user-images.githubusercontent.com/91787844/236277137-6c3cea75-77e3-42f2-9fd6-e270fac7ffc5.png)
  
 ## QUERY 5: Find those hotels in Delhi, which have those rooms available that can accommodate more than 1 person.
@@ -473,6 +475,7 @@ MySQL Command
  ![image](https://user-images.githubusercontent.com/91787844/236277679-9878d9d5-8c87-4f7a-bced-b2a44ebf4ced.png)
  
  OUTPUT
+ 
  ![image](https://user-images.githubusercontent.com/91787844/236277751-28500246-688f-4348-abe6-dac43b6a82c5.png)
 
 
