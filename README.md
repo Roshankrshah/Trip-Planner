@@ -185,11 +185,11 @@ In this table there is one functional dependency
 
  •	FDs:
  
-   o	bus_id ---> provider_name
+     o	bus_id ---> provider_name
    
-   o	bus_id ---> is_ac
+     o	bus_id ---> is_ac
    
-   o	bus_id ---> rating
+     o	bus_id ---> rating
    
  •	Normal Form: BCNF
  
@@ -197,45 +197,45 @@ In this table there is one functional dependency
 
  •	FDs:
  
-   o	{bus_id, source, departure_date} ---> time_of_departure
+     o	{bus_id, source, departure_date} ---> time_of_departure
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	bus_id from table Bus as bus_id
+     o	bus_id from table Bus as bus_id
    
-   o	city_name from table City as source
+     o	city_name from table City as source
    
  •	BusJourneyHours
  
  •	FDs:
  
-   o	{bus_id, source, destination, departure_date} ---> journey_hours
+     o	{bus_id, source, destination, departure_date} ---> journey_hours
  
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	{bus_id, source, departure_date} from table BusDepartureTime as bus_id,source, departure_date}
+     o	{bus_id, source, departure_date} from table BusDepartureTime as bus_id,source, departure_date}
    
-   o	city_name from table City as destination 
+     o	city_name from table City as destination 
    
 #### BusReservation
 
  •	FDs:
  
-   o	bus_id, source, destination, departure_date, seat_type} ---> cost
+     o	bus_id, source, destination, departure_date, seat_type} ---> cost
    
-   o	{bus_id, source, destination, departure_date, seat_type} ---> total_available_seats 
+     o	{bus_id, source, destination, departure_date, seat_type} ---> total_available_seats 
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	{bus_id, source, departure_date} from table BusDepartureTime as {bus_id, source, departure_date}
+     o	{bus_id, source, departure_date} from table BusDepartureTime as {bus_id, source, departure_date}
    
-   o	city_name from table City as destination
+     o	city_name from table City as destination
    
 ### City
 #### City
@@ -248,45 +248,45 @@ In this table there is one functional dependency
  
  •	Foreign Key:
  
-   o	city_name from table City as current _city
+     o	city_name from table City as current _city
    
-   o	city_name from table City as nearby_city 
+     o	city_name from table City as nearby_city 
    
 ### Locality
 #### Locality
 
  •	FDs:
  
-   o	locality_id ---> locality_name
+     o	locality_id ---> locality_name
    
-   o	locality_id ---> city_name
+     o	locality_id ---> city_name
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	city_name from table City as city_name 
+     o	city_name from table City as city_name 
    
 ### Place to visit
 #### PlacesToVisit 
 
  •	FDs:
  
-   o	{place_name, locality_id} ---> place_type
+     o	{place_name, locality_id} ---> place_type
    
-   o	{place_name, locality_id} ---> description_of_the_place
+     o	{place_name, locality_id} ---> description_of_the_place
    
-   o	{place_name, locality_id} ---> rating
+     o	{place_name, locality_id} ---> rating
    
-   o	{place_name, locality_id} ---> street_address
+     o	{place_name, locality_id} ---> street_address
    
-   o	{place_name, locality_id} ---> avg_cost_person
+     o	{place_name, locality_id} ---> avg_cost_person
    
  •	Normal Form: BCNF
  
  •	Foreign Key:
  
-   o	locality_id from table Locality as locality_id
+     o	locality_id from table Locality as locality_id
    
 ### Hotels
 ####	Hotels 
@@ -368,9 +368,124 @@ These are some Realistic Queries for the System with their following SQL command
   d ← 𝛑<city_name>(c)
  
 MySQL Command:
+ 
  ![image](https://user-images.githubusercontent.com/91787844/236275991-286d9c4e-526a-446a-9e6e-b3c30cf9e4b5.png)
+ 
 OUTPUT
+ 
  ![image](https://user-images.githubusercontent.com/91787844/236276040-24bca0a7-56ae-485f-a4d8-36b15f43dd15.png)
+ 
+## QUERY 2:  NON-AC buses between Delhi and Mumbai on date 16th
+April, 2021. 
+ 
+### Relational Algebra
+ 
+ a ← Bus ⨝<Bus.bus_id=BusReservation.bus_id> BusReservation
+ 
+ b ← 𝞂<source = ‘Delhi and destination = ‘Mumbai’ and is_ac = false and date =’2021-4-16’>(a)
+ 
+ c ← 𝛑<bus_id, bus_service_provider>(c)
+ 
+MySQL Command
+ 
+ ![image](https://user-images.githubusercontent.com/91787844/236276414-3ec12e87-9f4e-4cf6-92dc-21a742768c52.png)
+ 
+OUTPUT
+ 
+ ![image](https://user-images.githubusercontent.com/91787844/236276491-9bb6f04a-d751-4b2d-834b-1ff16d0014f3.png)
+ 
+## QUERY 3: Restaurants near the cheapest hotel in Delhi.
+ 
+### Relational Algebra
+ 
+ a ← hotels ⨝<hotel.locality_id=locality.locality_id> locality
+ 
+ b ← 𝞂<city_name = “Delhi”>(a)
+ 
+ c ← 𝛑<min(cost)>(b)
+ 
+ d ← 𝞂<cost in c and city_name = “Delhi”>(b)
+ 
+ e ← d ⨝<d.locality_id=Restaurants.locality_id>Restaurants
+ 
+ f ← 𝛑<city_name>(e)
+ 
+
+MySQL Command 
+ ![image](https://user-images.githubusercontent.com/91787844/236276713-ff3af607-d54f-40dc-ac0f-bacf40c8419e.png)
+ 
+ OUTPUT
+ 
+ ![image](https://user-images.githubusercontent.com/91787844/236276783-1f65575b-d212-4826-accb-3f44ea3c90a6.png)
+ 
+## QUERY 4: Find restaurants which are nearby to the highest rated place to visit in Delhi.
+ 
+### Relational Algebra
+ 
+ a ← PlacesToVisit ⨝<PlacesToVisit.locality_id=Locality.locality_id>Locality
+ 
+ b ← 𝞂<city_name = “Delhi”>(a)
+ 
+ c ← 𝛑<max(rating)>(b)
+ 
+ d ← 𝞂<cost in c and city_name = “Delhi”>(b)
+ 
+ e ← d ⨝<d.locality_id=Restaurants.locality_id> Restaurants
+ 
+ MySQL Command
+ 
+ ![image](https://user-images.githubusercontent.com/91787844/236277045-4f037805-a7e7-4da6-ab7e-73cb06ba87a0.png)
+ 
+ OUTPUT
+ ![image](https://user-images.githubusercontent.com/91787844/236277137-6c3cea75-77e3-42f2-9fd6-e270fac7ffc5.png)
+ 
+## QUERY 5: Find those hotels in Delhi, which have those rooms available that can accommodate more than 1 person.
+ 
+### Relational algebra
+ 
+ a ← HotelReservation ⨝<HotelReservation.room_type = TypeOfRoom.room_type>TypeOfRoom
+ 
+ b ← a ⨝<a.locality_id = Locality.locality_id> Locality
+ 
+ c ← 𝞂<city_name = “Delhi” and max_accomodation > 1 and total_available_rooms > 1>(b)
+ 
+ d ← 𝛑<distinct hote_name, room_type>(c)
+ 
+MySQL Command 
+ 
+ ![image](https://user-images.githubusercontent.com/91787844/236277448-9be6c780-b6a6-4243-bd21-489c67466221.png)
+
+ OUTPUT
+ 
+ ![image](https://user-images.githubusercontent.com/91787844/236277500-8a60eee6-b2e1-4df7-a4db-c83995b16fc2.png)
+ 
+## QUERY 6: All those cab service providers who can provide a ‘SUV’ cab in Vadodara.
+ 
+### Relational algebra
+ 
+ a ← Cabs ⨝<Cabs.cab_service_id=CabService.cab_service_id> CabService
+ 
+ b ← 𝞂<cab_type = “SUV” and city_name = “Vadodara”>(a)
+ 
+ c ← 𝛑<cab_service_id, provider_name>(b)
+
+MySQL Command
+ ![image](https://user-images.githubusercontent.com/91787844/236277679-9878d9d5-8c87-4f7a-bced-b2a44ebf4ced.png)
+ 
+ OUTPUT
+ ![image](https://user-images.githubusercontent.com/91787844/236277751-28500246-688f-4348-abe6-dac43b6a82c5.png)
+
+
+
+ 
+
+
+ 
+
+
+
+
+
 
 
     
