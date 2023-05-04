@@ -83,24 +83,24 @@ In this table there is one functional dependency
 {train_id --> train_name} and the normal form is BCNF.
 
 •	TrainDepartureTime
-•	FDs: {train_id, source} ---> departure_time 
-•	Normal Form: BCNF 
-•	Foreign Key:
-o	train_id from table Train as train_id
-o	city_name from table City as source
+  •	FDs: {train_id, source} ---> departure_time 
+  •	Normal Form: BCNF 
+  •	Foreign Key:
+    o	train_id from table Train as train_id
+    o	city_name from table City as source
 •	TrainReservation
-•	FDs:
-o	{train_id, ClassId, source, destination, Date} ---> fare 
-o	{train_id, ClassId, source, destination, Date} ---> train_status 
-o	{train_id, ClassId, source, destination, Date} ---> no_of_seats 
-•	Normal Form: BCNF
-•	Foreign Key:
-o	{train_id, source} from table TrainDepartureTime as {train_id, source}
-o	city_name from table City as destination 
+  •	FDs:
+    o	{train_id, ClassId, source, destination, Date} ---> fare 
+    o	{train_id, ClassId, source, destination, Date} ---> train_status 
+    o	{train_id, ClassId, source, destination, Date} ---> no_of_seats 
+  •	Normal Form: BCNF
+  •	Foreign Key:
+    o	{train_id, source} from table TrainDepartureTime as {train_id, source}
+    o	city_name from table City as destination 
 •	TrainJourneyHours
-•	FDs:
-o	{train_id, source, destination} ---> journey_hours 
-•	Normal Form: BCNF
-•	Foreign Key:
-o	{train_id, source} from table TrainDepartureTime as {train_id, source}
-o	city_name from table City as destination
+  •	FDs:
+    o	{train_id, source, destination} ---> journey_hours 
+  •	Normal Form: BCNF
+  •	Foreign Key:
+    o	{train_id, source} from table TrainDepartureTime as {train_id, source}
+    o	city_name from table City as destination
