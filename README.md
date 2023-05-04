@@ -182,6 +182,7 @@ In this table there is one functional dependency
     
 ###	BUS
 #### Bus
+
  •	FDs:
  
    o	bus_id ---> provider_name
@@ -193,6 +194,7 @@ In this table there is one functional dependency
  •	Normal Form: BCNF
  
 ####	BusDepartureTime
+
  •	FDs:
  
    o	{bus_id, source, departure_date} ---> time_of_departure
@@ -220,6 +222,7 @@ In this table there is one functional dependency
    o	city_name from table City as destination 
    
 #### BusReservation
+
  •	FDs:
  
    o	bus_id, source, destination, departure_date, seat_type} ---> cost
@@ -236,6 +239,7 @@ In this table there is one functional dependency
    
 ### City
 #### City
+
  •	Normal Form: BCNF
  
  •	NearByCites
@@ -250,6 +254,7 @@ In this table there is one functional dependency
    
 ### Locality
 #### Locality
+
  •	FDs:
  
    o	locality_id ---> locality_name
@@ -264,6 +269,7 @@ In this table there is one functional dependency
    
 ### Place to visit
 #### PlacesToVisit 
+
  •	FDs:
  
    o	{place_name, locality_id} ---> place_type
@@ -284,6 +290,7 @@ In this table there is one functional dependency
    
 ### Hotels
 ####	Hotels 
+
  •	FDs:
  
    o	{hotel_name, locality_id} ---> rating
@@ -302,6 +309,7 @@ In this table there is one functional dependency
    
 
 #### HotelReservation
+
  •	FDs:
  
    o	{hotel_name, locality_id, date_of_availability, RoomType} ---> total_available_rooms
@@ -317,6 +325,7 @@ In this table there is one functional dependency
    o	room_type from table TypeOfRoom as room_type  
    
 #### TypeOfRoom
+
  •	FDs:
  
    o	room_type ---> max_accomodation
@@ -325,6 +334,7 @@ In this table there is one functional dependency
  
 ### Restaurants
 ####	Restaurants
+
  •	FDs:
  
    o	{restaurant_name, locality_id} ---> restaurant_type
@@ -341,6 +351,26 @@ In this table there is one functional dependency
  
    o	locality_id from table Locality as locality_id
    
+
+# QUERIES:
+
+These are some Realistic Queries for the System with their following SQL commands and relational algebra.
+## Query 1: List all the cities which have more than 3 historical places to visit.
+
+### Relational Algebra:
+
+  a ← Locality ⨝<locality_id=PlacesToVisit.locality_id> PlacesToVisit
+  
+  b ← 𝞂<type = ‘Historical’>(a)
+  
+  c ← city_nameG count(city_name) (b) HAVING<ਹ<count> >=3>
+ 
+  d ← 𝛑<city_name>(c)
+ 
+MySQL Command:
+ ![image](https://user-images.githubusercontent.com/91787844/236275991-286d9c4e-526a-446a-9e6e-b3c30cf9e4b5.png)
+OUTPUT
+ ![image](https://user-images.githubusercontent.com/91787844/236276040-24bca0a7-56ae-485f-a4d8-36b15f43dd15.png)
 
 
     
