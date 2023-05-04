@@ -375,8 +375,7 @@ OUTPUT
  
  ![image](https://user-images.githubusercontent.com/91787844/236276040-24bca0a7-56ae-485f-a4d8-36b15f43dd15.png)
  
-## QUERY 2:  NON-AC buses between Delhi and Mumbai on date 16th
-April, 2021. 
+## QUERY 2:  NON-AC buses between Delhi and Mumbai on date 16th April, 2021. 
  
 ### Relational Algebra
  
@@ -472,6 +471,7 @@ MySQL Command
  c ← 𝛑<cab_service_id, provider_name>(b)
 
 MySQL Command
+ 
  ![image](https://user-images.githubusercontent.com/91787844/236277679-9878d9d5-8c87-4f7a-bced-b2a44ebf4ced.png)
  
  OUTPUT
